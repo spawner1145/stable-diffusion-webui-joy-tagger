@@ -4,7 +4,7 @@ try:
 except ImportError:
     IN_WEBUI = False
 import gradio as gr
-from inference import stream_chat, unload_models, batch_caption
+from .inference import stream_chat, unload_models, batch_caption
 
 # 定义标题
 TITLE = "<h1><center>JoyCaption</center></h1>"
