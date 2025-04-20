@@ -1,28 +1,46 @@
 import launch
-'''
-packages = {
-    "chardet": "chardet",
-    "fastapi": "fastapi",
-    "execjs": "PyExecJS",
-    "lxml": "lxml",
-    "tqdm": "tqdm",
-    "pathos": "pathos",
-    "cryptography": "cryptography",
+import importlib
+from packaging.version import Version
+from packaging.requirements import Requirement
 
-    # The following packages are required for translation service. If you do not need translation service, you can remove them.
-    # 以下是翻译所需的包，如果不需要翻译服务，可以删除掉它们。
-    "openai": "openai",
-    "boto3": "boto3",
-    "aliyunsdkcore": "aliyun-python-sdk-core",
-    "aliyunsdkalimt": "aliyun-python-sdk-alimt",
-}
+def is_installed(pip_package):
+    """
+    Check if a package is installed and meets version requirements specified in pip-style format.
 
-if __name__ == "__main__":
-    for package_name in packages:
-        package = packages[package_name]
-        try:
-            if not launch.is_installed(package_name):
-                launch.run_pip(f"install {package}", f"sd-webui-prompt-all-in-one: {package_name}")
-        except Exception as e:
-            print(e)
-            print(f'Warning: Failed to install {package}, some preprocessors may not work.')'''
+    Args:
+        pip_package (str): Package name in pip-style format (e.g., "numpy>=1.22.0").
+    
+    Returns:
+        bool: True if the package is installed and meets the version requirement, False otherwise.
+    """
+    try:
+        # Parse the pip-style package name and version constraints
+        requirement = Requirement(pip_package)
+        package_name = requirement.name
+        specifier = requirement.specifier  # e.g., >=1.22.0
+        
+        # Check if the package is installed
+        dist = importlib.metadata.distribution(package_name)
+        installed_version = Version(dist.version)
+        
+        # Check version constraints
+        if specifier.contains(installed_version):
+            return True
+        else:
+            print(f"Installed version of {package_name} ({installed_version}) does not satisfy the requirement ({specifier}).")
+            return False
+    except importlib.metadata.PackageNotFoundError:
+        print(f"Package {pip_package} is not installed.")
+        return False
+    
+requirements = [
+'huggingface_hub',
+'accelerate',
+'transformers',
+'sentencepiece',
+'peft',
+]
+
+for module in requirements:
+    if not is_installed(module):
+        launch.run_pip(f"install {module}", module)
