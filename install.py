@@ -39,6 +39,7 @@ requirements = [
 'transformers',
 'sentencepiece',
 'peft',
+'modelscope',
 ]
 
 for module in requirements:
