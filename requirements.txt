@@ -1,6 +1,7 @@
 huggingface_hub>=0.23.4
 accelerate
 gradio
+tqdm
 transformers>=4.44.0
 sentencepiece
 peft>=0.12.0
