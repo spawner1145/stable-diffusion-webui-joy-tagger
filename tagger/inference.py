@@ -5,6 +5,7 @@ from pathlib import Path
 import os
 from PIL import Image
 import glob
+from tqdm import tqdm
 
 # 尝试导入 ModelScope
 try:
@@ -284,7 +285,7 @@ def batch_caption(
 
         status_messages = [f"Found {len(image_files)} images in '{input_directory}'.\nProcessing images...\n"]
         
-        for image_path in image_files:
+        for image_path in tqdm(image_files, desc="Processing images", unit="image"):
             try:
                 # 加载图片
                 image = Image.open(image_path).convert("RGB")
@@ -325,3 +326,4 @@ def batch_caption(
     
     except Exception as e:
         return f"Error during batch processing: {str(e)}"
+    
