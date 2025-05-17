@@ -36,7 +36,7 @@ def is_installed(pip_package):
 requirements = [
 'huggingface_hub',
 'accelerate',
-'transformers',
+'transformers>=4.44.0',
 'sentencepiece',
 'peft',
 'modelscope',
