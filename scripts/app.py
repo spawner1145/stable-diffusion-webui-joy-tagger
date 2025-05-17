@@ -33,7 +33,7 @@ def create_ui():
                         )
                         extra_options = gr.CheckboxGroup(
                             choices=[
-                                "If there is a person/character in the image you must refer to them as {name}.",
+                                f"If there is a person/character in the image you must refer to them as {name_input}.",
                                 "Do NOT include information about people/characters that cannot be changed (like ethnicity, gender, etc), but do still include changeable attributes (like hair style).",
                                 "Include information about lighting.",
                                 "Include information about camera angle.",
@@ -66,7 +66,6 @@ def create_ui():
                         name_input = gr.Textbox(label="Person/Character Name (if applicable)")
                         gr.Markdown("**Note:** Name input is only used if an Extra Option is selected that requires it.")
                         custom_prompt = gr.Textbox(label="Custom Prompt (optional, will override all other settings)")
-                        gr.Markdown("**Note:** Alpha Two is not a general instruction follower and will not follow prompts outside its training data well. Use this feature with caution.")
                         download_source = gr.Dropdown(
                             choices=["huggingface", "modelscope"],
                             label="Model Download Source",
@@ -185,7 +184,7 @@ def create_ui():
                         )
                         batch_extra_options = gr.CheckboxGroup(
                             choices=[
-                                "If there is a person/character in the image you must refer to them as {name}.",
+                                f"If there is a person/character in the image you must refer to them as {batch_name_input}.",
                                 "Do NOT include information about people/characters that cannot be changed (like ethnicity, gender, etc), but do still include changeable attributes (like hair style).",
                                 "Include information about lighting.",
                                 "Include information about camera angle.",
@@ -218,7 +217,6 @@ def create_ui():
                         batch_name_input = gr.Textbox(label="Person/Character Name (if applicable)")
                         gr.Markdown("**Note:** Name input is only used if an Extra Option is selected that requires it.")
                         batch_custom_prompt = gr.Textbox(label="Custom Prompt (optional, will override all other settings)")
-                        gr.Markdown("**Note:** Alpha Two is not a general instruction follower and will not follow prompts outside its training data well. Use this feature with caution.")
                         batch_download_source = gr.Dropdown(
                             choices=["huggingface", "modelscope"],
                             label="Model Download Source",
