@@ -127,21 +127,28 @@ def load_models(
 
     # 检查模型文件是否存在（使用 config.json 作为标志文件）
     config_path = MODEL_DIR / "config.json"
-    if not config_path.exists():
-        print(f"Downloading JoyCaption model to {MODEL_DIR} from {download_source}")
+    md_config_path = Path("models/joy_caption/fancyfeast/llama-joycaption-beta-one-hf-llava/config.json")
+    if not config_path.exists() and not md_config_path.exists():
+        print(f"Downloading JoyCaption model")
         if download_source == "huggingface":
             snapshot_download(repo_id=MODEL_NAME, local_dir=MODEL_DIR, local_dir_use_symlinks=False, token=HF_TOKEN)
-        elif download_source == "modelscope":
+        elif download_source == "modelscope" :
             ms_snapshot_download(model_id=MODELSCOPE_MODEL_NAME, cache_dir=MODEL_DIR)
 
     # 加载模型
     print("Loading JoyCaption")
-    processor = AutoProcessor.from_pretrained(MODEL_DIR, local_files_only=True)
+    if config_path.exists():
+        model_dir = MODEL_DIR
+    elif md_config_path.exists():
+        model_dir = Path("models/joy_caption/fancyfeast/llama-joycaption-beta-one-hf-llava")
+    else:
+        raise FileNotFoundError(f"Model not found in {MODEL_DIR} or {md_config_path}")
+    processor = AutoProcessor.from_pretrained(model_dir, local_files_only=True)
     # 设置 patch_size 和 vision_feature_select_strategy 以避免警告
     processor.patch_size = patch_size
     processor.vision_feature_select_strategy = vision_feature_select_strategy
     llava_model = LlavaForConditionalGeneration.from_pretrained(
-        MODEL_DIR,
+        model_dir,
         torch_dtype=torch_dtype,
         device_map=device_map,
         local_files_only=True
