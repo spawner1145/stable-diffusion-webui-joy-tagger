@@ -21,7 +21,7 @@ def create_ui():
                     with gr.Column():
                         input_image = gr.Image(type="pil", label="Input Image")
                         caption_type = gr.Dropdown(
-                            choices=["Descriptive", "Descriptive (Informal)", "Training Prompt", "MidJourney", "Booru tag list", "Booru-like tag list", "Art Critic", "Product Listing", "Social Media Post"],
+                            choices=["Descriptive", "Descriptive (Casual)", "Straightforward", "Stable Diffusion Prompt", "MidJourney", "Danbooru tag list", "e621 tag list", "Rule34 tag list", "Booru-like tag list", "Art Critic", "Product Listing", "Social Media Post"],
                             label="Caption Type",
                             value="Descriptive",
                         )
@@ -34,22 +34,32 @@ def create_ui():
                         extra_options = gr.CheckboxGroup(
                             choices=[
                                 "If there is a person/character in the image you must refer to them as {name}.",
-                                "Do NOT include information about people/characters that cannot be changed (like ethnicity, gender, etc), but do still include changeable attributes (like hair style).",
-                                "Include information about lighting.",
-                                "Include information about camera angle.",
-                                "Include information about whether there is a watermark or not.",
-                                "Include information about whether there are JPEG artifacts or not.",
-                                "If it is a photo you MUST include information about what camera was likely used and details such as aperture, shutter speed, ISO, etc.",
-                                "Do NOT include anything sexual; keep it PG.",
-                                "Do NOT mention the image's resolution.",
-                                "You MUST include information about the subjective aesthetic quality of the image from low to very high.",
-                                "Include information on the image's composition style, such as leading lines, rule of thirds, or symmetry.",
-                                "Do NOT mention any text that is in the image.",
-                                "Specify the depth of field and whether the background is in focus or blurred.",
-                                "If applicable, mention the likely use of artificial or natural lighting sources.",
-                                "Do NOT use any ambiguous language.",
-                                "Include whether the image is sfw, suggestive, or nsfw.",
-                                "ONLY describe the most important elements of the image."
+        						"Do NOT include information about people/characters that cannot be changed (like ethnicity, gender, etc), but do still include changeable attributes (like hair style).",
+        						"Include information about lighting.",
+        						"Include information about camera angle.",
+        						"Include information about whether there is a watermark or not.",
+        						"Include information about whether there are JPEG artifacts or not.",
+        						"If it is a photo you MUST include information about what camera was likely used and details such as aperture, shutter speed, ISO, etc.",
+        						"Do NOT include anything sexual; keep it PG.",
+        						"Do NOT mention the image's resolution.",
+        						"You MUST include information about the subjective aesthetic quality of the image from low to very high.",
+        						"Include information on the image's composition style, such as leading lines, rule of thirds, or symmetry.",
+        						"Do NOT mention any text that is in the image.",
+        						"Specify the depth of field and whether the background is in focus or blurred.",
+        						"If applicable, mention the likely use of artificial or natural lighting sources.",
+        						"Do NOT use any ambiguous language.",
+        						"Include whether the image is sfw, suggestive, or nsfw.",
+        						"ONLY describe the most important elements of the image.",
+        						"If it is a work of art, do not include the artist's name or the title of the work.",
+        						"Identify the image orientation (portrait, landscape, or square) and aspect ratio if obvious.",
+        						"""Use vulgar slang and profanity, such as (but not limited to) "fucking," "slut," "cock," etc.""",
+        						"Do NOT use polite euphemisms—lean into blunt, casual phrasing.",
+        						"Include information about the ages of any people/characters when applicable.",
+        						"Mention whether the image depicts an extreme close-up, close-up, medium close-up, medium shot, cowboy shot, medium wide shot, wide shot, or extreme wide shot.",
+        						"Do not mention the mood/feeling/etc of the image.",
+        						"Explicitly specify the vantage height (eye-level, low-angle worm’s-eye, bird’s-eye, drone, rooftop, etc.).",
+        						"If there is a watermark, you must mention it.",
+        						"""Your response will be used by a text-to-image model, so avoid useless meta phrases like “This image shows…”, "You are looking at...", etc.""",
                             ],
                             label="Extra Options"
                         )
@@ -163,7 +173,7 @@ def create_ui():
                     with gr.Column():
                         input_directory = gr.Textbox(label="Input Directory Path", placeholder="Enter the path to the directory containing images")
                         batch_caption_type = gr.Dropdown(
-                            choices=["Descriptive", "Descriptive (Informal)", "Training Prompt", "MidJourney", "Booru tag list", "Booru-like tag list", "Art Critic", "Product Listing", "Social Media Post"],
+                            choices=["Descriptive", "Descriptive (Casual)", "Straightforward", "Stable Diffusion Prompt", "MidJourney", "Danbooru tag list", "e621 tag list", "Rule34 tag list", "Booru-like tag list", "Art Critic", "Product Listing", "Social Media Post"],
                             label="Caption Type",
                             value="Descriptive",
                         )
