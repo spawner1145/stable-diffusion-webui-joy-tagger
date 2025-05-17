@@ -33,7 +33,7 @@ def create_ui():
                         )
                         extra_options = gr.CheckboxGroup(
                             choices=[
-                                f"If there is a person/character in the image you must refer to them as {name_input}.",
+                                "If there is a person/character in the image you must refer to them as {name}.",
                                 "Do NOT include information about people/characters that cannot be changed (like ethnicity, gender, etc), but do still include changeable attributes (like hair style).",
                                 "Include information about lighting.",
                                 "Include information about camera angle.",
@@ -184,7 +184,7 @@ def create_ui():
                         )
                         batch_extra_options = gr.CheckboxGroup(
                             choices=[
-                                f"If there is a person/character in the image you must refer to them as {batch_name_input}.",
+                                "If there is a person/character in the image you must refer to them as {name}.",
                                 "Do NOT include information about people/characters that cannot be changed (like ethnicity, gender, etc), but do still include changeable attributes (like hair style).",
                                 "Include information about lighting.",
                                 "Include information about camera angle.",
